@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="860.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="860.0" prefWidth="390.0" style="-fx-border-color: black;">
+         <children>
+            <HBox prefHeight="109.0" prefWidth="329.0" style="-fx-border-color: black;">
+               <children>
+                  <Pane prefHeight="107.0" prefWidth="125.0">
+                     <children>
+                        <ImageView fitHeight="119.0" fitWidth="94.0" layoutX="16.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../../../../../Downloads/RollBack.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="107.0" prefWidth="260.0">
+                     <children>
+                        <Pane layoutY="6.0" prefHeight="94.0" prefWidth="252.0" style="-fx-border-radius: 70; -fx-border-color: black;">
+                           <children>
+                              <Pane prefHeight="94.0" prefWidth="94.0" style="-fx-border-radius: 50; -fx-border-color: black;">
+                                 <children>
+                                    <ImageView fitHeight="65.0" fitWidth="65.0" layoutX="15.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../../../../../Downloads/Plus.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <Text layoutX="108.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New chat" wrappingWidth="144.0">
+                                 <font>
+                                    <Font size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <ScrollPane prefHeight="747.0" prefWidth="387.0">
+               <content>
+                  <VBox prefHeight="816.0" prefWidth="370.0" />
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</Pane>
