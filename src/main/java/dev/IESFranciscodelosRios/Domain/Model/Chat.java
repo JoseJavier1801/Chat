@@ -17,6 +17,11 @@ public class Chat implements IChat {
         this.messages = messages;
     }
 
+    @Override
+    public boolean addParticipant() {
+        return false;
+    }
+
     public boolean SendMessage(){
         return false;
     }
