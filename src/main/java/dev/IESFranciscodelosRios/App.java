@@ -16,9 +16,11 @@ public class App extends Application {
 
     private static Scene scene;
     public static void main(String[] args) {
-        String ipServer = args[2];
-        System.out.println(ipServer);
-        System.out.println(args.length!=2);
+        if(args.length>0){
+            String ipServer = args[2];
+            System.out.println(ipServer);
+            System.out.println(args.length!=2);
+        }
         launch(args);
     }
     @Override
