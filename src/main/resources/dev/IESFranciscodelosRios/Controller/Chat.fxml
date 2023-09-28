@@ -8,20 +8,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="751.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.IESFranciscodelosRios.Controller.Chat">
    <children>
       <VBox layoutX="169.0" layoutY="176.0" prefHeight="751.0" prefWidth="912.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane prefHeight="712.0" prefWidth="912.0" />
+            <ScrollPane fx:id="ScrollPane_Chat" prefHeight="712.0" prefWidth="912.0" />
             <Pane prefHeight="128.0" prefWidth="912.0" style="-fx-background-color: e9e9e9;">
                <children>
-                  <Button layoutX="795.0" layoutY="25.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="67.0" style="-fx-background-color: f3c0ec; -fx-background-radius: 10;" text="Send" textFill="WHITE">
+                  <Button fx:id="Button_Send" layoutX="795.0" layoutY="25.0" mnemonicParsing="false" onAction="#SendMessage" prefHeight="34.0" prefWidth="67.0" style="-fx-background-color: f3c0ec; -fx-background-radius: 10;" text="Send" textFill="WHITE">
                      <font>
                         <Font name="Imprint MT Shadow" size="16.0" />
                      </font>
                   </Button>
-                  <TextField layoutX="31.0" layoutY="25.0" prefHeight="25.0" prefWidth="733.0" promptText="Escribe un mensaje" style="-fx-background-radius: 15;">
+                  <TextField fx:id="TextField_SendMessage" layoutX="31.0" layoutY="25.0" prefHeight="25.0" prefWidth="733.0" promptText="Escribe un mensaje" style="-fx-background-radius: 15;">
                      <font>
                         <Font size="16.0" />
                      </font>
