@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="860.0" prefWidth="912.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.IESFranciscodelosRios.Controller.RoomController">
+   <children>
+      <VBox layoutX="291.0" layoutY="103.0" prefHeight="860.0" prefWidth="912.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="107.0" prefWidth="912.0">
+               <children>
+                  <VBox prefHeight="107.0" prefWidth="924.0" style="-fx-border-color: Black;">
+                     <children>
+                        <HBox prefHeight="49.0" prefWidth="912.0">
+                           <children>
+                              <Text fx:id="text_RoomName" strokeType="OUTSIDE" strokeWidth="0.0" text="RoomName" wrappingWidth="296.8033752441406">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Text>
+                           </children>
+                        </HBox>
+                        <HBox prefHeight="57.0" prefWidth="396.0">
+                           <children>
+                              <HBox prefHeight="51.0" prefWidth="370.0" style="-fx-border-color: black;">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Miembros:" wrappingWidth="117.47005844116211">
+                                       <font>
+                                          <Font size="23.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="20.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Text fx:id="text_members" strokeType="OUTSIDE" strokeWidth="0.0" text="Luis,Jose..." wrappingWidth="188.1366786956787">
+                                       <HBox.margin>
+                                          <Insets top="20.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Pane fx:id="pane_ChatContainer" prefHeight="751.0" prefWidth="912.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
