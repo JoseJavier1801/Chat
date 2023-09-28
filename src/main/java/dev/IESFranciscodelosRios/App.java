@@ -15,7 +15,12 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-
+    public static void main(String[] args) {
+        String ipServer = args[2];
+        System.out.println(ipServer);
+        System.out.println(args.length!=2);
+        launch(args);
+    }
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 800, 600);
@@ -31,10 +36,6 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/"+fxml + ".fxml"));
         return fxmlLoader.load();
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
 }
