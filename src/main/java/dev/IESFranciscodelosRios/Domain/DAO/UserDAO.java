@@ -27,6 +27,7 @@ public class UserDAO implements IUserDAO {
         User user = new User(); // Crea un objeto User vacío
         user = xmlManager.readXML(user, "usuarios.xml"); // Lee el usuario desde el XML
         return user;
+
     }
 
     @Override
