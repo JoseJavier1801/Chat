@@ -28,8 +28,8 @@ public class ChatController {
      * Luego sobreescribira el archivo XML de la ROOM 
      */
     public void SendMessage(){
-        Message message=new Message();
-        chat.getMessages().add(message);
+        //Message message=new Message();
+        //chat.getMessages().add(message);
 
         UpdateChat();
     }
