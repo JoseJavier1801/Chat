@@ -1,8 +1,12 @@
 package dev.IESFranciscodelosRios.Domain.Model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalTime;
 import java.util.Objects;
-
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Room {
 
     private  String roomName;
@@ -10,7 +14,7 @@ public class Room {
     private Chat chat=new Chat() ;
 
     private String description;
-
+    public Room(){}
     public Room(String roomName, LocalTime dateStart, Chat chat, String description) {
         this.roomName = roomName;
         this.dateStart = dateStart;
