@@ -2,11 +2,9 @@ package dev.IESFranciscodelosRios.Domain.Model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalTime;
 import java.util.Objects;
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
 public class Room {
 
     private  String roomName;
@@ -69,7 +67,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "Room{" +
+        return "uno.xml{" +
                 "roomName='" + roomName + '\'' +
                 ", dateStart=" + dateStart +
                 ", chat=" + chat +

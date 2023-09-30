@@ -20,7 +20,7 @@ public class HubController {
     @FXML
     private Button create;
 
-    // Crear una lista para almacenar objetos Room
+    // Crear una lista para almacenar objetos uno.xml
     private List<Room> roomList = new ArrayList<>();
 
     public User userLogged;
@@ -51,7 +51,7 @@ public class HubController {
         // Obtener la fecha actual
         LocalTime currentDate = LocalTime.now();
 
-        // Crear una nueva instancia de Room
+        // Crear una nueva instancia de uno.xml
         Room newRoom = new Room(roomName, currentDate, null, description);
 
         // Agregar la nueva sala a la lista

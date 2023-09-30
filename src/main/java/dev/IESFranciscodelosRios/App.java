@@ -1,8 +1,11 @@
 package dev.IESFranciscodelosRios;
 
 import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
+import dev.IESFranciscodelosRios.Domain.Model.Chat;
+import dev.IESFranciscodelosRios.Domain.Model.Room;
 import dev.IESFranciscodelosRios.Domain.Model.User;
 import dev.IESFranciscodelosRios.Utils.Utils;
+import dev.IESFranciscodelosRios.Utils.XMLManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,7 +14,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class App extends Application {
@@ -21,7 +26,6 @@ public class App extends Application {
     public static String IpServer;
 
     public static void main(String[] args) {
-        RoomDAO.get_instance().SearchAllRoom();
         //Extraeremos la Ip pasada por argumento. En caso de haber un argumento con las reglas gramaticales de una ip
         IpServer=Utils.IpAddress(args);
         launch(args);

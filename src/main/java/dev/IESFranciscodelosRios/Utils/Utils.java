@@ -40,7 +40,7 @@ public class Utils {
 
     public static boolean isXMLFile(String filePath){
         if(!filePath.isEmpty()){
-            String patron = "^*.XML";
+            String patron = ".*\\.xml$";
 
             Pattern pattern = Pattern.compile(patron);
             return pattern.matcher(filePath).matches();

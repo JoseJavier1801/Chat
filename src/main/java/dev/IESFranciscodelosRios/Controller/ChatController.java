@@ -24,7 +24,7 @@ public class ChatController {
     }
 
     /**
-     * Este metodo creara un mensaje nuevo para posteriormente agregarlo al chat de la Room .
+     * Este metodo creara un mensaje nuevo para posteriormente agregarlo al chat de la uno.xml .
      * Luego sobreescribira el archivo XML de la ROOM 
      */
     public void SendMessage(){
