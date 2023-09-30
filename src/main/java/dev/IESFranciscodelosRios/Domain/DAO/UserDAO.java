@@ -10,9 +10,8 @@ public class UserDAO implements IUserDAO {
     private XMLManager xmlManager;
 
     private UserDAO() {
-        xmlManager=new XMLManager();
+        xmlManager = new XMLManager();
     }
-
 
     public static UserDAO getInstance() {
         if (instance == null) {
@@ -22,16 +21,16 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public User searchUser() {
-        //buscar usuario en el xml
-        User user = new User(); // Crea un objeto User vacío
-        user = xmlManager.readXML(user, "usuarios.xml"); // Lee el usuario desde el XML
+    public User searchUser(String username) {
+        // Aquí puedes usar XMLManager para leer un objeto User desde un archivo XML.
+        User user = xmlManager.readXML(new User(), username + ".xml");
         return user;
-
     }
 
     @Override
     public boolean newUser(User user) {
-        return xmlManager.writeXML(user, "usuarios.xml"); // Escribe el usuario en el XML
+        // Aquí puedes usar XMLManager para escribir un objeto User en un archivo XML.
+        boolean result = xmlManager.writeXML(user, user.getNickname() + ".xml");
+        return result;
     }
 }
