@@ -1,15 +1,19 @@
 package dev.IESFranciscodelosRios.Domain.Model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Message {
     private String text;
-    private String sendDate;
-    private String user;
+    private LocalDate sendDate;
+    private User user;
 
-    public Message(String text, String sendDate, String user) {
+    public Message() {
+    }
+
+    public Message(String text, User user) {
         this.text = text;
-        this.sendDate = sendDate;
+        this.sendDate = LocalDate.now();
         this.user = user;
     }
 
@@ -17,11 +21,11 @@ public class Message {
         return text;
     }
 
-    public String getSendDate() {
+    public LocalDate getSendDate() {
         return sendDate;
     }
 
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -29,11 +33,11 @@ public class Message {
         this.text = text;
     }
 
-    public void setSendDate(String sendDate) {
+    public void setSendDate(LocalDate sendDate) {
         this.sendDate = sendDate;
     }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

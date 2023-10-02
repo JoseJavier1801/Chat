@@ -15,7 +15,15 @@ public class RoomDAO implements IRoomDAO {
     static File FileRootRoom= new File(App.FileRootRoom+"\\Rooms");
     public static RoomDAO _instance;
     @Override
-    public Room NewRoom() {
+    public Room NewRoom(Room room) {
+
+        if(room!=null && searchRoom(room.getRoomName())==null){
+            System.out.println(FileRootRoom.getAbsolutePath());
+            if(XMLManager.writeXML(room,room.getRoomName(),FileRootRoom.getAbsolutePath())){
+                return searchRoom(room.getRoomName());
+            }
+
+        }
         return null;
     }
 

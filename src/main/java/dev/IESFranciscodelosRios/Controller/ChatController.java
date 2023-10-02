@@ -1,7 +1,9 @@
 package dev.IESFranciscodelosRios.Controller;
 
+import dev.IESFranciscodelosRios.App;
 import dev.IESFranciscodelosRios.Domain.Model.Chat;
 import dev.IESFranciscodelosRios.Domain.Model.Message;
+import dev.IESFranciscodelosRios.Domain.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -28,8 +30,11 @@ public class ChatController {
      * Luego sobreescribira el archivo XML de la ROOM 
      */
     public void SendMessage(){
-        //Message message=new Message();
-        //chat.getMessages().add(message);
+        User user=App.getUserLogin();
+        Message message=new Message(TextField_SendMessage.getText(),user);
+
+        //App.roomController
+        chat.getMessages().add(message);
 
         UpdateChat();
     }

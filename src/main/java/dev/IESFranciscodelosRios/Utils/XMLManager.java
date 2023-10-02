@@ -33,7 +33,7 @@ public class XMLManager {
             try {
                 context = JAXBContext.newInstance(c.getClass());
                 Unmarshaller m = context.createUnmarshaller();
-                c= (T) m.unmarshal(new File("XML\\"+fichero));
+                c= (T) m.unmarshal(new File("XML\\"+fichero+".xml"));
             } catch (JAXBException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {
@@ -49,7 +49,7 @@ public class XMLManager {
             try {
                 context = JAXBContext.newInstance(c.getClass());
                 Unmarshaller m = context.createUnmarshaller();
-                c= (T) m.unmarshal(new File(directorio+"\\"+fichero));
+                c= (T) m.unmarshal(new File(directorio+"\\"+fichero+".xml"));
             } catch (JAXBException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {
@@ -66,7 +66,7 @@ public class XMLManager {
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            m.marshal(c, new File(directorio+"\\"+fichero));
+            m.marshal(c, new File(directorio+"\\"+fichero+".xml"));
             result = true;
         } catch (JAXBException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package dev.IESFranciscodelosRios;
 
+import dev.IESFranciscodelosRios.Controller.RoomController;
 import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
 import dev.IESFranciscodelosRios.Domain.Model.Chat;
 import dev.IESFranciscodelosRios.Domain.Model.Room;
@@ -24,6 +25,7 @@ public class App extends Application {
     private static Scene scene;
     public static String FileRootRoom=System.getProperty("user.dir");
     public static String IpServer;
+    public static RoomController roomController;//puntero rapido al ocntroller del RoomController
 
     public static void main(String[] args) {
         //Extraeremos la Ip pasada por argumento. En caso de haber un argumento con las reglas gramaticales de una ip
@@ -47,8 +49,18 @@ public class App extends Application {
 
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/" + fxml + ".fxml"));
-        return fxmlLoader.load();
+        Parent root = fxmlLoader.load();
+
+        // Verificar si el archivo FXML es "Room.fxml"
+        if ("Room".equals(fxml)) {
+            // Si es "Room.fxml", guardar el controlador en una variable
+            roomController = fxmlLoader.getController();
+            // Ahora puedes usar roomController para interactuar con el controlador de "Room.fxml"
+        }
+
+        return root;
     }
+
 
     public static User getUserLogin() {
         return UserLogin;

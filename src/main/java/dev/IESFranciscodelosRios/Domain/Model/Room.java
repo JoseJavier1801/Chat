@@ -2,9 +2,12 @@ package dev.IESFranciscodelosRios.Domain.Model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalTime;
 import java.util.Objects;
+
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement
 public class Room {
 
     private  String roomName;
@@ -12,7 +15,22 @@ public class Room {
     private Chat chat=new Chat() ;
 
     private String description;
-    public Room(){}
+
+    // Constructor por defecto
+    public Room() {
+        // Puedes inicializar algunos valores predeterminados aquí si es necesario
+        this.roomName = "";
+        this.dateStart = LocalTime.now();
+        this.chat = new Chat();
+        this.description = "";
+    }
+
+    public Room(String roomName, Chat chat, String description) {
+        this.roomName = roomName;
+        this.dateStart = LocalTime.now();
+        this.chat = chat;
+        this.description = description;
+    }
     public Room(String roomName, LocalTime dateStart, Chat chat, String description) {
         this.roomName = roomName;
         this.dateStart = dateStart;
@@ -67,7 +85,7 @@ public class Room {
 
     @Override
     public String toString() {
-        return "uno.xml{" +
+        return "Room{" +
                 "roomName='" + roomName + '\'' +
                 ", dateStart=" + dateStart +
                 ", chat=" + chat +
