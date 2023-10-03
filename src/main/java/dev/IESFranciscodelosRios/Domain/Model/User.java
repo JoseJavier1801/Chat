@@ -1,7 +1,10 @@
 package dev.IESFranciscodelosRios.Domain.Model;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Objects;
 
+@XmlRootElement
 public class User {
     private String nickname;
 
@@ -13,6 +16,7 @@ public class User {
         this(" ");
     }
 
+    @XmlElement
     public String getNickname() {
         return nickname;
     }

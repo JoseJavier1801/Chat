@@ -1,16 +1,23 @@
 package dev.IESFranciscodelosRios.Domain.DAO;
 
 import dev.IESFranciscodelosRios.Domain.Model.User;
-import dev.IESFranciscodelosRios.Interface.IUserDAO;
+import dev.IESFranciscodelosRios.Domain.Model.UserList;
 import dev.IESFranciscodelosRios.Utils.XMLManager;
 
-public class UserDAO implements IUserDAO {
+import javax.xml.bind.JAXBException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class UserDAO {
 
     private static UserDAO instance;
-    private XMLManager xmlManager;
+    private UserList userList;
+    private String xmlFilePath; // Ruta al archivo XML donde se almacenarán los usuarios
 
     private UserDAO() {
-        xmlManager = new XMLManager();
+        userList = new UserList();
+        userList.setUsers(new ArrayList<>());
+        xmlFilePath = "users.xml"; // Puedes ajustar la ruta del archivo XML según tu necesidad
     }
 
     public static UserDAO getInstance() {
@@ -20,17 +27,41 @@ public class UserDAO implements IUserDAO {
         return instance;
     }
 
-    @Override
-    public User searchUser(String username) {
-        // Aquí puedes usar XMLManager para leer un objeto User desde un archivo XML.
-        User user = xmlManager.readXML(new User(), username + ".xml");
-        return user;
+    public void addUser(User user) throws JAXBException {
+        userList.getUsers().add(user);
+        saveUsersToXml();
     }
 
-    @Override
-    public boolean newUser(User user) {
-        // Aquí puedes usar XMLManager para escribir un objeto User en un archivo XML.
-        boolean result = xmlManager.writeXML(user, user.getNickname() + ".xml");
-        return result;
+    public User getUserByNickname(String nickname) {
+        for (User user : userList.getUsers()) {
+            if (user.getNickname().equals(nickname)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    public List<User> getAllUsers() {
+        return userList.getUsers();
+    }
+
+    public void updateUser(User updatedUser) throws JAXBException {
+        for (int i = 0; i < userList.getUsers().size(); i++) {
+            User user = userList.getUsers().get(i);
+            if (user.getNickname().equals(updatedUser.getNickname())) {
+                userList.getUsers().set(i, updatedUser);
+                saveUsersToXml();
+                return;
+            }
+        }
+    }
+
+    public void deleteUser(String nickname) throws JAXBException {
+        userList.getUsers().removeIf(user -> user.getNickname().equals(nickname));
+        saveUsersToXml();
+    }
+
+    private void saveUsersToXml() throws JAXBException {
+        XMLManager.writeXML(userList, xmlFilePath, UserList.class);
     }
 }

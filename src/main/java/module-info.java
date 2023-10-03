@@ -1,4 +1,4 @@
-module org.example {
+module dev.IESFranciscodelosRios {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.xml.bind;
@@ -7,4 +7,5 @@ module org.example {
     exports dev.IESFranciscodelosRios;
     exports dev.IESFranciscodelosRios.Controller;
     opens dev.IESFranciscodelosRios.Controller to javafx.fxml;
+    opens dev.IESFranciscodelosRios.Domain.Model to java.xml.bind;
 }
