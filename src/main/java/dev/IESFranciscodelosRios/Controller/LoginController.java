@@ -26,7 +26,12 @@ public class LoginController {
 
     @FXML
     private void login() throws IOException, JAXBException {
-        String username = nickname_input.getText(); // Obtiene el nombre introducido
+        String username = nickname_input.getText().trim(); // Obtén el nombre introducido y quita espacios en blanco
+
+        if (username.isEmpty()) {
+            showAlert("Invalid Nickname");
+            return; // Salir del método si el campo está vacío
+        }
 
         User existingUser = UDAO.getUserByNickname(username);
 
@@ -34,22 +39,23 @@ public class LoginController {
             App.setRoot("Hub");
         } else {
             // El usuario no existe, muestra un diálogo de confirmación.
-            boolean createNewUser = showConfirmationDialog("El usuario no existe. ¿Desea crearlo?");
+            boolean createNewUser = showConfirmationDialog("The user does not exist. Do you want to create it?");
 
             if (createNewUser) {
                 User newUser = new User(username);
                 UDAO.addUser(newUser);
-                showAlert("Usuario creado con éxito.");
+                showAlert("User created succesfully");
             }
         }
     }
+
     private boolean showConfirmationDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmación");
+        alert.setTitle("Confirmed");
         alert.setHeaderText(null);
         alert.setContentText(message);
 
-        ButtonType yesButton = new ButtonType("Sí");
+        ButtonType yesButton = new ButtonType("Yes");
         ButtonType noButton = new ButtonType("No");
 
         alert.getButtonTypes().setAll(yesButton, noButton);
