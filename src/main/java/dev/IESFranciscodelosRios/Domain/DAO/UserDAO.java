@@ -12,12 +12,12 @@ public class UserDAO {
 
     private static UserDAO instance;
     private UserList userList;
-    private String xmlFilePath; // Ruta al archivo XML donde se almacenarán los usuarios
+    private String xmlFilePath; // Ruta del XML
 
     private UserDAO() {
         userList = new UserList();
         userList.setUsers(new ArrayList<>());
-        xmlFilePath = "users.xml"; // Puedes ajustar la ruta del archivo XML según tu necesidad
+        xmlFilePath = "users.xml";
     }
 
     public static UserDAO getInstance() {
@@ -33,6 +33,11 @@ public class UserDAO {
     }
 
     public User getUserByNickname(String nickname) {
+        UserList loadedUserList = XMLManager.readXML(new UserList(), xmlFilePath);
+        if (loadedUserList != null) {
+            userList = loadedUserList;
+        }
+
         for (User user : userList.getUsers()) {
             if (user.getNickname().equals(nickname)) {
                 return user;
@@ -40,6 +45,9 @@ public class UserDAO {
         }
         return null;
     }
+
+
+
 
     public List<User> getAllUsers() {
         return userList.getUsers();
