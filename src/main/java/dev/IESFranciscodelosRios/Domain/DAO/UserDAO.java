@@ -46,9 +46,6 @@ public class UserDAO {
         return null;
     }
 
-
-
-
     public List<User> getAllUsers() {
         return userList.getUsers();
     }
@@ -70,6 +67,6 @@ public class UserDAO {
     }
 
     private void saveUsersToXml() throws JAXBException {
-        XMLManager.writeXML(userList, xmlFilePath, UserList.class);
+        XMLManager.writeXML(userList, xmlFilePath);
     }
 }

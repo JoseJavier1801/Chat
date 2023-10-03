@@ -9,7 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 public class XMLManager {
-    public static <T> boolean writeXML(UserList c, String fichero, Class<UserList> userClass) {
+    public static <T> boolean writeXML(UserList c, String fichero) {
         boolean result = false;
         JAXBContext context;
         try {
