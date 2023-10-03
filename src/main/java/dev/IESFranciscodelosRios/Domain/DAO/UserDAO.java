@@ -12,15 +12,14 @@ public class UserDAO {
 
     private static UserDAO instance;
     private UserList userList;
-    private String xmlFilePath; // Ruta del XML
+    private final String xmlFilePath; // Ruta del XML
 
     private UserDAO() {
-        userList = new UserList();
-        userList.setUsers(new ArrayList<>());
         xmlFilePath = "users.xml";
+        loadUserListFromXml();
     }
 
-    public static UserDAO getInstance() {
+    public static UserDAO getInstance(){
         if (instance == null) {
             instance = new UserDAO();
         }
@@ -33,28 +32,37 @@ public class UserDAO {
     }
 
     public User getUserByNickname(String nickname) {
-        UserList loadedUserList = XMLManager.readXML(new UserList(), xmlFilePath);
-        if (loadedUserList != null) {
-            userList = loadedUserList;
+        if (userList == null || userList.getUsers() == null) {
+            // Si userList o userList.getUsers() son null, crea un nuevo XML con una lista vacía
+            userList = new UserList();
+            userList.setUsers(new ArrayList<>());
+            try {
+                saveUsersToXml(); // Guarda el XML vacío
+            } catch (JAXBException e) {
+                e.printStackTrace(); // Maneja la excepción de JAXB
+            }
+            return null;
         }
 
         for (User user : userList.getUsers()) {
-            if (user.getNickname().equals(nickname)) {
+            if (user != null && user.getNickname() != null && user.getNickname().equals(nickname)) {
                 return user;
             }
         }
         return null;
     }
 
+
     public List<User> getAllUsers() {
         return userList.getUsers();
     }
 
     public void updateUser(User updatedUser) throws JAXBException {
-        for (int i = 0; i < userList.getUsers().size(); i++) {
-            User user = userList.getUsers().get(i);
+        List<User> users = userList.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            User user = users.get(i);
             if (user.getNickname().equals(updatedUser.getNickname())) {
-                userList.getUsers().set(i, updatedUser);
+                users.set(i, updatedUser);
                 saveUsersToXml();
                 return;
             }
@@ -68,5 +76,14 @@ public class UserDAO {
 
     private void saveUsersToXml() throws JAXBException {
         XMLManager.writeXML(userList, xmlFilePath);
+    }
+
+    private void loadUserListFromXml(){
+        userList = XMLManager.readXML(new UserList(), xmlFilePath);
+        if (userList == null) {
+            // Si no se pudo cargar desde el XML, crea una instancia vacía
+            userList = new UserList();
+            userList.setUsers(new ArrayList<>());
+        }
     }
 }
