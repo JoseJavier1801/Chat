@@ -18,7 +18,7 @@ public class MessageController {
 
     public void SetData(Message message){
         this.message=message;
-        TextArea_Text.setText(message.getText());
-        text_UserName.setText(App.getUserLogin().getNickname());
+        this.TextArea_Text.setText(message.getText());
+        this.text_UserName.setText(message.getUser().getNickname());
     }
 }

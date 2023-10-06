@@ -34,11 +34,11 @@ public class ChatController {
         this.chat = chat;
         threadUpdate=new ChatThreadUpdate(this);
         threadUpdate.start();
+        UpdateChat();
     }
 
     public ChatController(Chat chat) {
         this.chat = chat;
-        UpdateChat();
     }
 
     /**
@@ -51,15 +51,16 @@ public class ChatController {
 
         chat.getMessages().add(message);
         App.roomController.save(); //Serializamos el XML con el nuevo mensaje
-        UpdateChat(); //Actualizamos el Nodo Chat
+        UpdateChat();
     }
 
     public void UpdateChat() {
+        Vbox_ChatContainer.getChildren().clear();
         if (!chat.getMessages().isEmpty()) {
             try {
                 Room room = XMLManager.readXML(new Room(), App.roomController.getRoom().getRoomName(), App.FileRootRoom + "\\Rooms\\");
-                for (Message aux : room.getChat().getMessages()) {
-                    FXMLLoader loader = FXMLLoader.load(getClass().getResource("Message.fxml"));
+                for (Message aux : this.chat.getMessages()) {
+                    FXMLLoader loader = new FXMLLoader(App.class.getResource("Controller/Message.fxml"));
                     if (aux != null) {
                         Node node = loader.load();
                         MessageController messageController = loader.getController();
@@ -72,8 +73,8 @@ public class ChatController {
                 throw new RuntimeException(e);
             }
         }
-
     }
+
 
     public Chat getChat() {
         return chat;

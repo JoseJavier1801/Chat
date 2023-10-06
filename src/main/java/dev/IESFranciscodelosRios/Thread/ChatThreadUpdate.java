@@ -2,6 +2,9 @@ package dev.IESFranciscodelosRios.Thread;
 
 import dev.IESFranciscodelosRios.App;
 import dev.IESFranciscodelosRios.Controller.ChatController;
+import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
+import dev.IESFranciscodelosRios.Domain.Model.Room;
+import javafx.application.Platform;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,8 +17,11 @@ public class ChatThreadUpdate extends Thread{
     private ChatController controller;
     public File fileRootRoom;
     String ruta;
+    private long lastModified;
+    private String roomname;
     public ChatThreadUpdate(ChatController controller){
         this.controller=controller;
+        this.roomname=App.roomController.getRoom().getRoomName();
         this.ruta=App.FileRootRoom+"\\Rooms\\"+App.roomController.getRoom().getRoomName()+".xml";
         fileRootRoom= new File(ruta);
     }
@@ -23,7 +29,12 @@ public class ChatThreadUpdate extends Thread{
         try {
             while (fileRootRoom.exists()){
                 BasicFileAttributes atributos = Files.readAttributes(Paths.get(ruta), BasicFileAttributes.class);
-                fileRootRoom.lastModified();
+                if(fileRootRoom.lastModified()!=lastModified){
+                    lastModified=fileRootRoom.lastModified();
+                    Platform.runLater(() -> {
+                        controller.UpdateChat();
+                    });
+                }
                 Thread.sleep(3000);
             }
         }catch (InterruptedException e){
