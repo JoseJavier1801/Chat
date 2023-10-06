@@ -4,10 +4,12 @@ import dev.IESFranciscodelosRios.Interface.IChat;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(namespace = "Chat")
 public class Chat implements IChat {
     List<Message> messages = new ArrayList<>();
     public Chat() {

@@ -7,12 +7,11 @@ import java.time.LocalTime;
 import java.util.Objects;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement(namespace = "Room")
 public class Room {
 
     private  String roomName;
-    private LocalTime dateStart;
-    private Chat chat=new Chat() ;
+    private Chat chat;
 
     private String description;
 
@@ -20,20 +19,18 @@ public class Room {
     public Room() {
         // Puedes inicializar algunos valores predeterminados aquí si es necesario
         this.roomName = "";
-        this.dateStart = LocalTime.now();
+        this.chat = new Chat();
+        this.description = "";
+    }
+    public Room(String roomName) {
+        // Puedes inicializar algunos valores predeterminados aquí si es necesario
+        this.roomName = roomName;
         this.chat = new Chat();
         this.description = "";
     }
 
     public Room(String roomName, Chat chat, String description) {
         this.roomName = roomName;
-        this.dateStart = LocalTime.now();
-        this.chat = chat;
-        this.description = description;
-    }
-    public Room(String roomName, LocalTime dateStart, Chat chat, String description) {
-        this.roomName = roomName;
-        this.dateStart = dateStart;
         this.chat = chat;
         this.description = description;
     }
@@ -42,9 +39,6 @@ public class Room {
         return roomName;
     }
 
-    public LocalTime getDateStart() {
-        return dateStart;
-    }
 
     public Chat getChat() {
         return chat;
@@ -58,9 +52,6 @@ public class Room {
         this.roomName = roomName;
     }
 
-    public void setDateStart(LocalTime dateStart) {
-        this.dateStart = dateStart;
-    }
 
     public void setChat(Chat chat) {
         this.chat = chat;
@@ -75,19 +66,18 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return Objects.equals(roomName, room.roomName) && Objects.equals(dateStart, room.dateStart) && Objects.equals(chat, room.chat) && Objects.equals(description, room.description);
+        return Objects.equals(roomName, room.roomName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(roomName, dateStart, chat, description);
+        return Objects.hash(roomName);
     }
 
     @Override
     public String toString() {
         return "Room{" +
                 "roomName='" + roomName + '\'' +
-                ", dateStart=" + dateStart +
                 ", chat=" + chat +
                 ", description='" + description + '\'' +
                 '}';

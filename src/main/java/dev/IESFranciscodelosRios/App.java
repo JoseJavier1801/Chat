@@ -1,24 +1,16 @@
 package dev.IESFranciscodelosRios;
 
+import dev.IESFranciscodelosRios.Controller.HubController;
 import dev.IESFranciscodelosRios.Controller.RoomController;
-import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
-import dev.IESFranciscodelosRios.Domain.Model.Chat;
-import dev.IESFranciscodelosRios.Domain.Model.Room;
 import dev.IESFranciscodelosRios.Domain.Model.User;
 import dev.IESFranciscodelosRios.Utils.Utils;
-import dev.IESFranciscodelosRios.Utils.XMLManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.Set;
-import java.util.regex.Pattern;
 
 public class App extends Application {
     private static User UserLogin;
@@ -26,6 +18,7 @@ public class App extends Application {
     public static String FileRootRoom=System.getProperty("user.dir");
     public static String IpServer;
     public static RoomController roomController;//puntero rapido al ocntroller del RoomController
+    public static HubController hubController;
 
     public static void main(String[] args) {
         //Extraeremos la Ip pasada por argumento. En caso de haber un argumento con las reglas gramaticales de una ip
@@ -37,30 +30,36 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 800, 600);
+        scene = new Scene(loadFXML("Login"));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    public static void setRoot(String fxml) {
+        try {
+            scene.setRoot(loadFXML(fxml));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private static Parent loadFXML(String fxml) throws IOException {
+    public static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/" + fxml + ".fxml"));
         Parent root = fxmlLoader.load();
 
-        // Verificar si el archivo FXML es "Room.fxml"
-        if ("Room".equals(fxml)) {
-            // Si es "Room.fxml", guardar el controlador en una variable
-            roomController = fxmlLoader.getController();
-            // Ahora puedes usar roomController para interactuar con el controlador de "Room.fxml"
+        if("Hub".equals(fxml)){
+            hubController=fxmlLoader.getController();
         }
 
         return root;
     }
-
+    public static void newStage(Parent p) throws IOException {
+        Stage stage2=new Stage();
+        Scene scene2= new Scene(p);
+        stage2.setScene(scene2);
+        stage2.show();
+    }
 
     public static User getUserLogin() {
         return UserLogin;
@@ -68,5 +67,21 @@ public class App extends Application {
 
     public static void setUserLogin(User userLogin) {
         UserLogin = userLogin;
+    }
+
+    public static RoomController getRoomController() {
+        return roomController;
+    }
+
+    public static void setRoomController(RoomController roomController) {
+        App.roomController = roomController;
+    }
+
+    public static HubController getHubController() {
+        return hubController;
+    }
+
+    public static void setHubController(HubController hubController) {
+        App.hubController = hubController;
     }
 }

@@ -12,14 +12,14 @@ import java.util.Optional;
 import java.util.Set;
 
 public class RoomDAO implements IRoomDAO {
-    static File FileRootRoom= new File(App.FileRootRoom+"\\Rooms");
+    static File FileRootRoom = new File(App.FileRootRoom + "\\Rooms");
     public static RoomDAO _instance;
+
     @Override
     public Room NewRoom(Room room) {
 
-        if(room!=null && searchRoom(room.getRoomName())==null){
-            System.out.println(FileRootRoom.getAbsolutePath());
-            if(XMLManager.writeXML(room,room.getRoomName(),FileRootRoom.getAbsolutePath())){
+        if (room != null && searchRoom(room.getRoomName()) == null) {
+            if (this.Save(room)) {//if(XMLManager.writeXML(room,room.getRoomName(),FileRootRoom.getAbsolutePath())){
                 return searchRoom(room.getRoomName());
             }
 
@@ -30,13 +30,15 @@ public class RoomDAO implements IRoomDAO {
     /**
      * Dentro del directorio Room se buscara el fichero con el nombre introducido por parametro. y se eliminara
      * en caso de encontrarse
+     *
      * @param RoomName Nombre
      * @return
      */
     @Override
     public boolean deleteRoom(String RoomName) {
-        File file= new File(RoomName+".xml");
-        if(file.exists() && file.isFile()){
+        File file = new File(FileRootRoom.getAbsolutePath()+"\\"+RoomName + ".xml");
+        System.out.println(file.getAbsolutePath());
+        if (file.exists() && file.isFile()) {
             file.delete();
         }
         return !file.exists();
@@ -44,63 +46,59 @@ public class RoomDAO implements IRoomDAO {
 
     @Override
     public Room searchRoom(String RoomName) {
-        Set<Room> allRooms=SearchAllRoom();
+        Set<Room> allRooms = SearchAllRoom();
 
-        /*v1
-        for (uno.xml r:aux) { //buscaremos la uno.xml con el mismo nombre que RoomName
-            if(r.getRoomName().equals(RoomName)){
-                return r;
-            }
-        }*/
+        if (allRooms == null) {
+            return null;
+        }
 
+        Optional<Room> result = allRooms.stream()
+                .filter(s -> s.getRoomName().equals(RoomName))
+                .findFirst();
 
-        //v2
-        Optional<Room>result = allRooms.stream().filter(s->s.getRoomName().equals(RoomName)).findFirst();
-
-
-        return result.orElse(null); //se devolvera result . y si no hay nada entonces null
+        return result.orElse(null);
     }
 
 
     /**
      * Probablemente no sirve
-    @Override
-    public uno.xml Load(uno.xml room) {
-
-    }*/
+     *
+     * @Override public uno.xml Load(uno.xml room) {
+     * <p>
+     * }
+     */
 
     @Override
     public boolean Save(Room room) {
-        return room!=null?XMLManager.writeXML(room,room.getRoomName(),"Rooms"):false;
+        return room != null ? XMLManager.writeXML(room, room.getRoomName(), FileRootRoom.getAbsolutePath()) : false;
     }
 
     /**
-
      * Devolvera una lista completa de todos los rooms
-     * @return
      *
+     * @return
      */
 
     @Override
     public Set<Room> SearchAllRoom() {
-        File[] aux=FileRootRoom.listFiles();
-        Set<Room> result= new HashSet<>();
+        File[] aux = FileRootRoom.listFiles();
+        Set<Room> result = new HashSet<>();
 
-        for (File f:aux) {
-            System.out.println(f.getName());
-            if(Utils.isXMLFile(f.getName())){//Verificaremos que sea un archivo XML
-                Room room = XMLManager.readXML(new Room(),f.getName()); // Instancia deserializada
+        for (File f : aux) {
+            if (Utils.isXMLFile(f.getName())) {//Verificaremos que sea un archivo XML
+                Room room = XMLManager.readXML(new Room(), f.getName(), FileRootRoom.getAbsolutePath()); // Instancia deserializada
                 result.add(room);
             }
         }
-        return !result.isEmpty()?result:null;//si result no esta vacio. devolvemos result. Si no null
+        return !result.isEmpty() ? result : null;//si result no esta vacio. devolvemos result. Si no null
     }
+
     private RoomDAO() {
     }
 
     public static RoomDAO get_instance() {
-        if(_instance==null){
-            _instance=new RoomDAO();
+        if (_instance == null) {
+            _instance = new RoomDAO();
         }
         return _instance;
     }

@@ -4,8 +4,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="130.0" prefWidth="387.0" style="-fx-background-color: d3d3d3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.IESFranciscodelosRios.Controller.CardRoomController">
+<AnchorPane onMouseClicked="#loadRoom" prefHeight="100.0" prefWidth="387.0" style="-fx-background-color: d3d3d3;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.IESFranciscodelosRios.Controller.CardRoomController">
    <children>
       <Text fx:id="text_RoomName" layoutX="14.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RoomName" wrappingWidth="219.46996688842773">
          <font>

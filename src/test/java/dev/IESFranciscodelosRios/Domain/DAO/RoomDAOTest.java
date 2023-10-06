@@ -12,14 +12,16 @@ public class RoomDAOTest extends TestCase {
     }
 
     public void testDeleteRoom() {
+        System.out.println(dao.deleteRoom("Prueba"));
     }
 
     public void testSearchRoom() {
-    }
-
-    public void testSave() {
+        System.out.println(dao.searchRoom("Prueba"));
     }
 
     public void testSearchAllRoom() {
+        for (Room aux:dao.SearchAllRoom()) {
+            System.out.println(aux);
+        }
     }
 }

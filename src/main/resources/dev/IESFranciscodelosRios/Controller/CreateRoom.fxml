@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.IESFranciscodelosRios.Controller.CreateRoomController">
+
+    <!-- Campo de entrada para el nombre de la sala -->
+    <Label layoutX="30.0" layoutY="50.0" text="Nombre de la Sala:" />
+    <TextField fx:id="roomNameField" layoutX="160.0" layoutY="50.0" prefWidth="200.0" />
+
+    <!-- Campo de entrada para la descripción de la sala -->
+    <Label layoutX="30.0" layoutY="90.0" text="Descripción:" />
+    <TextArea fx:id="descriptionArea" layoutX="160.0" layoutY="90.0" prefHeight="100.0" prefWidth="200.0" />
+
+    <!-- Botón para crear la sala -->
+    <Button layoutX="30.0" layoutY="220.0" onAction="#createRoom" text="Crear Sala" />
+   <Label layoutX="30.0" layoutY="14.0" prefHeight="17.0" prefWidth="141.0" text="Crear sala" />
+</AnchorPane>

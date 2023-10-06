@@ -26,7 +26,7 @@
                   </Pane>
                   <Pane prefHeight="107.0" prefWidth="260.0">
                      <children>
-                        <Pane fx:id="button_createRoom" layoutY="6.0" onMouseClicked="#CreateRoom" prefHeight="94.0" prefWidth="252.0" style="-fx-border-radius: 70; -fx-border-color: black;">
+                        <Pane fx:id="button_createRoom" layoutY="6.0" onMouseClicked="#createRoom" prefHeight="94.0" prefWidth="252.0" style="-fx-border-radius: 70; -fx-border-color: black;">
                            <children>
                               <Pane prefHeight="94.0" prefWidth="94.0" style="-fx-border-radius: 50; -fx-border-color: black;">
                                  <children>
@@ -48,7 +48,10 @@
                   </Pane>
                </children>
             </HBox>
-            <ScrollPane fx:id="RoomsContainer" prefHeight="747.0" prefWidth="387.0" />
+            <ScrollPane prefHeight="747.0" prefWidth="387.0">
+               <content>
+                  <VBox fx:id="RoomsContainer" prefHeight="741.0" prefWidth="381.0" />
+               </content></ScrollPane>
          </children>
       </VBox>
       <Pane fx:id="pane_Room" layoutX="389.0" layoutY="-1.0" prefHeight="860.0" prefWidth="912.0" />

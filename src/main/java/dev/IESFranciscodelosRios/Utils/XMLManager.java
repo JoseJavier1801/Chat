@@ -33,7 +33,7 @@ public class XMLManager {
             try {
                 context = JAXBContext.newInstance(c.getClass());
                 Unmarshaller m = context.createUnmarshaller();
-                c= (T) m.unmarshal(new File("XML\\"+fichero+".xml"));
+                c= (T) m.unmarshal(new File("XML\\"+fichero));
             } catch (JAXBException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {
@@ -49,7 +49,7 @@ public class XMLManager {
             try {
                 context = JAXBContext.newInstance(c.getClass());
                 Unmarshaller m = context.createUnmarshaller();
-                c= (T) m.unmarshal(new File(directorio+"\\"+fichero+".xml"));
+                c= (T) m.unmarshal(new File(directorio+"\\"+fichero));
             } catch (JAXBException e) {
                 e.printStackTrace();
             } catch (NullPointerException e) {

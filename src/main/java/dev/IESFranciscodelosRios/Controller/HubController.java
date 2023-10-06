@@ -1,29 +1,30 @@
 package dev.IESFranciscodelosRios.Controller;
 
+import dev.IESFranciscodelosRios.App;
+import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
 import dev.IESFranciscodelosRios.Domain.Model.Room;
 import dev.IESFranciscodelosRios.Domain.Model.User;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class HubController {
-    @FXML
-    private TextField roomNameField;
-    @FXML
-    private TextArea descriptionRoom;
-    @FXML
-    private Button create;
 
     // Crear una lista para almacenar objetos uno.xml
     private List<Room> roomList = new ArrayList<>();
-
     public User userLogged;
+    @FXML
+    private VBox RoomsContainer;
+    @FXML
+    private Pane pane_Room;
 
     public void addToRoomList(Room room) {
         roomList.add(room);
@@ -35,37 +36,53 @@ public class HubController {
     }
 
     @FXML
-    private void ButtonExit() throws IOException {
-        createRoom();
+    private void Exit() {
+        App.setUserLogin(null);
+        App.setRoot("Login");
+    }
+
+    @FXML
+    public void initialize() {
+        loadRoomCard();
     }
 
     @FXML
     public void createRoom() {
-        // Obtener los valores del formulario
-        String roomName = roomNameField.getText();
-        String description = descriptionRoom.getText();
-
-        // Generar el ID automáticamente (puedes usar un contador, por ejemplo)
-        int roomId = generateRoomId();
-
-        // Obtener la fecha actual
-        LocalTime currentDate = LocalTime.now();
-
-        // Crear una nueva instancia de uno.xml
-        Room newRoom = new Room(roomName, currentDate, null, description);
-
-        // Agregar la nueva sala a la lista
-        addToRoomList(newRoom);
-
-        // Limpiar los campos del formulario
-        roomNameField.clear();
-        descriptionRoom.clear();
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/createRoom.fxml"));
+            App.newStage(fxmlLoader.load());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    // Método para generar un ID de sala automático (puedes implementarlo según tus necesidades)
-    private int generateRoomId() {
-        // Implementa la lógica para generar un ID único
-        // Por ejemplo, puedes utilizar un contador o alguna estrategia de generación de IDs
-        return 0;
+    @FXML
+    public void loadRoomCard() {
+        RoomsContainer.getChildren().clear();
+        try {
+            Set<Room> collection;
+            if ((collection = RoomDAO.get_instance().SearchAllRoom())!=null) {
+                for (Room aux : collection) {
+
+                    if (aux != null) {
+                        FXMLLoader loader = new FXMLLoader(App.class.getResource("Controller/CardRoom.fxml"));
+                        Node node = loader.load();
+                        CardRoomController cardRoomController = loader.getController();
+                        cardRoomController.SetData(aux);
+                        RoomsContainer.getChildren().add(node);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Pane getPane_Room() {
+        return pane_Room;
+    }
+
+    public void setPane_Room(Pane pane_Room) {
+        this.pane_Room = pane_Room;
     }
 }
