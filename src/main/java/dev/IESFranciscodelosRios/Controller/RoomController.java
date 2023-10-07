@@ -1,6 +1,7 @@
 package dev.IESFranciscodelosRios.Controller;
 
 import dev.IESFranciscodelosRios.App;
+import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
 import dev.IESFranciscodelosRios.Domain.DAO.UserDAO;
 import dev.IESFranciscodelosRios.Domain.Model.Chat;
 import dev.IESFranciscodelosRios.Domain.Model.Room;
@@ -52,7 +53,7 @@ public class RoomController {
         try {
             node = loader.load();
             chatController = loader.getController();
-            chatController.SetData(room.getChat());
+            chatController.SetData();
 
             pane_ChatContainer.getChildren().add(node);
         } catch (IOException e) {

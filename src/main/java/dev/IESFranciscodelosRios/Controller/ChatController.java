@@ -1,6 +1,7 @@
 package dev.IESFranciscodelosRios.Controller;
 
 import dev.IESFranciscodelosRios.App;
+import dev.IESFranciscodelosRios.Domain.DAO.RoomDAO;
 import dev.IESFranciscodelosRios.Domain.DAO.UserDAO;
 import dev.IESFranciscodelosRios.Domain.Model.Chat;
 import dev.IESFranciscodelosRios.Domain.Model.Message;
@@ -19,27 +20,24 @@ import javafx.scene.layout.VBox;
 import java.io.IOException;
 
 public class ChatController {
-    private Chat chat;
     private ChatThreadUpdate threadUpdate;
     @FXML
     private TextField TextField_SendMessage;
     @FXML
     private VBox Vbox_ChatContainer;
+    private String roomname;
 
     public ChatController() {
 
     }
 
-    public void SetData(Chat chat) {
-        this.chat = chat;
+    public void SetData() {
+        this.roomname=App.getRoomController().getRoom().getRoomName();
         threadUpdate=new ChatThreadUpdate(this);
         threadUpdate.start();
-    }
-
-    public ChatController(Chat chat) {
-        this.chat = chat;
         UpdateChat();
     }
+
 
     /**
      * Este metodo creara un mensaje nuevo para posteriormente agregarlo al chat de la uno.xml .
@@ -49,17 +47,18 @@ public class ChatController {
         User user = App.getUserLogin();
         Message message = new Message(TextField_SendMessage.getText(), user);
 
-        chat.getMessages().add(message);
+        App.getRoomController().getRoom().getChat().getMessages().add(message);//chat.getMessages().add(message)
         App.roomController.save(); //Serializamos el XML con el nuevo mensaje
-        UpdateChat(); //Actualizamos el Nodo Chat
+        UpdateChat();
     }
 
     public void UpdateChat() {
-        if (!chat.getMessages().isEmpty()) {
+        Vbox_ChatContainer.getChildren().clear();
+        if (!RoomDAO.get_instance().searchRoom(roomname).getChat().getMessages().isEmpty()) {
             try {
                 Room room = XMLManager.readXML(new Room(), App.roomController.getRoom().getRoomName(), App.FileRootRoom + "\\Rooms\\");
-                for (Message aux : room.getChat().getMessages()) {
-                    FXMLLoader loader = FXMLLoader.load(getClass().getResource("Message.fxml"));
+                for (Message aux : RoomDAO.get_instance().searchRoom(roomname).getChat().getMessages()) {
+                    FXMLLoader loader = new FXMLLoader(App.class.getResource("Controller/Message.fxml"));
                     if (aux != null) {
                         Node node = loader.load();
                         MessageController messageController = loader.getController();
@@ -72,15 +71,6 @@ public class ChatController {
                 throw new RuntimeException(e);
             }
         }
-
-    }
-
-    public Chat getChat() {
-        return chat;
-    }
-
-    public void setChat(Chat chat) {
-        this.chat = chat;
     }
 
     public Thread getThreadUpdate() {
