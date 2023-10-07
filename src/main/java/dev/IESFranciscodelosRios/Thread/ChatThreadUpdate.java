@@ -31,6 +31,7 @@ public class ChatThreadUpdate extends Thread{
                 BasicFileAttributes atributos = Files.readAttributes(Paths.get(ruta), BasicFileAttributes.class);
                 if(fileRootRoom.lastModified()!=lastModified){
                     lastModified=fileRootRoom.lastModified();
+                    App.getRoomController().setRoom(RoomDAO.get_instance().searchRoom(roomname));
                     Platform.runLater(() -> {
                         controller.UpdateChat();
                     });

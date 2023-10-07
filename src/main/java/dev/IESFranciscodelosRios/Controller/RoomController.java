@@ -53,7 +53,7 @@ public class RoomController {
         try {
             node = loader.load();
             chatController = loader.getController();
-            chatController.SetData(room.getChat());
+            chatController.SetData();
 
             pane_ChatContainer.getChildren().add(node);
         } catch (IOException e) {
