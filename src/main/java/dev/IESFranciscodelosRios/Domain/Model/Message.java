@@ -1,15 +1,17 @@
 package dev.IESFranciscodelosRios.Domain.Model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Message {
     private String text;
-    private String sendDate;
-    private String user;
+    private User user;
 
-    public Message(String text, String sendDate, String user) {
+    public Message() {
+    }
+
+    public Message(String text, User user) {
         this.text = text;
-        this.sendDate = sendDate;
         this.user = user;
     }
 
@@ -17,11 +19,7 @@ public class Message {
         return text;
     }
 
-    public String getSendDate() {
-        return sendDate;
-    }
-
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -29,32 +27,17 @@ public class Message {
         this.text = text;
     }
 
-    public void setSendDate(String sendDate) {
-        this.sendDate = sendDate;
-    }
 
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Message message = (Message) o;
-        return Objects.equals(text, message.text) && Objects.equals(sendDate, message.sendDate) && Objects.equals(user, message.user);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(text, sendDate, user);
-    }
 
     @Override
     public String toString() {
         return "Message{" +
                 "text='" + text + '\'' +
-                ", sendDate='" + sendDate + '\'' +
                 ", user='" + user + '\'' +
                 '}';
     }
