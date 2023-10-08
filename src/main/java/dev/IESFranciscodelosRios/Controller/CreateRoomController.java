@@ -19,7 +19,10 @@ public class CreateRoomController {
     private TextArea descriptionArea;
     @FXML
     private Button create;
-
+    /**
+     * esta funcion es la que comprueba que todos los campos esta rellenos
+     * @return devuelve un true si los campos estan rellenos
+     */
     @FXML
     private boolean areFieldsFilled() {
         String description="";
@@ -30,7 +33,9 @@ public class CreateRoomController {
         // Verificar si ambos campos están rellenos
         return !roomName.isEmpty() && !description.isEmpty();
     }
-
+    /**
+     * esta funcion se encarga de coger todos los datos que de la sala para crearla
+     */
     @FXML
     public void createRoom() {
         // Verificar si los campos están rellenos antes de crear una nueva sala
@@ -57,7 +62,11 @@ public class CreateRoomController {
             showAlert("Error", "Por favor, rellena todos los campos antes de crear una sala.");
         }
     }
-
+    /**
+     * esta funcion es para mostrar el mensaje de error
+     * @param title
+     * @param message
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
