@@ -52,10 +52,11 @@ public class LoginController {
                 User newUser = new User(username);
                 UDAO.addUser(newUser);
                 App.setUserLogin(UDAO.getUserByNickname(username));
-                showAlert("User created succesfully");
+                showAlert("User created successfully");
             }
         }
     }
+
     /**
      * Muestra un cuadro de diálogo de confirmación con un mensaje y opciones "Sí" y "No".
      *
@@ -64,7 +65,7 @@ public class LoginController {
      */
     private boolean showConfirmationDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmed");
+        alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText(message);
 
@@ -77,6 +78,7 @@ public class LoginController {
 
         return result.isPresent() && result.get() == yesButton;
     }
+
     /**
      * Muestra una ventana emergente de alerta con un mensaje.
      *
