@@ -52,6 +52,10 @@ public class ChatController {
         UpdateChat();
     }
 
+    /**
+     * Este metodo agregara creara nodos de todos los mensajes de una room. para posteriormente insertarlos en un container
+     * de este modo se mostraran a los usuarios los mensajes
+     */
     public void UpdateChat() {
         Vbox_ChatContainer.getChildren().clear();
         if (!RoomDAO.get_instance().searchRoom(roomname).getChat().getMessages().isEmpty()) {

@@ -46,6 +46,10 @@ public class HubController {
         loadRoomCard();
     }
 
+    /**
+     * Este metodo cargara la vista CreateRoom.fxml donde se creara la nueva sala
+     */
+
     @FXML
     public void createRoom() {
         try {
@@ -56,6 +60,9 @@ public class HubController {
         }
     }
 
+    /**
+     * Este metodo instanciara tantas vistas y controladores como Rooms existan en el programa
+     */
     @FXML
     public void loadRoomCard() {
         RoomsContainer.getChildren().clear();

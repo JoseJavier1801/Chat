@@ -19,6 +19,10 @@ public class CardRoomController {
         this.room=room;
         text_RoomName.setText(room.getRoomName());
     }
+
+    /**
+     * Construira una Card de la room por tantas rooms como existan
+     */
     @FXML
     public void loadRoom(){
         FXMLLoader loader = new FXMLLoader(App.class.getResource("Controller/Room.fxml"));
