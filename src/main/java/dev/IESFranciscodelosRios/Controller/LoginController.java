@@ -22,8 +22,15 @@ public class LoginController {
     @FXML
     private Button loginBTN;
 
-    private UserDAO UDAO =UserDAO.getInstance();
+    private UserDAO UDAO = UserDAO.getInstance();
 
+    /**
+     * Este método se llama cuando se hace clic en el botón de inicio de sesión.
+     * Realiza la lógica de inicio de sesión y gestiona las acciones correspondientes.
+     *
+     * @throws IOException   Si ocurre un error de entrada/salida.
+     * @throws JAXBException Si ocurre un error de serialización/deserialización XML.
+     */
     @FXML
     private void login() throws IOException, JAXBException {
         String username = nickname_input.getText().trim(); // Obtén el nombre introducido y quita espacios en blanco
@@ -46,14 +53,20 @@ public class LoginController {
                 User newUser = new User(username);
                 UDAO.addUser(newUser);
                 App.setUserLogin(UDAO.getUserByNickname(username));
-                showAlert("User created succesfully");
+                showAlert("User created successfully");
             }
         }
     }
 
+    /**
+     * Muestra un cuadro de diálogo de confirmación con un mensaje y opciones "Sí" y "No".
+     *
+     * @param message El mensaje que se mostrará en el cuadro de diálogo.
+     * @return true si se selecciona "Sí", false si se selecciona "No".
+     */
     private boolean showConfirmationDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmed");
+        alert.setTitle("Confirmation");
         alert.setHeaderText(null);
         alert.setContentText(message);
 
@@ -66,6 +79,12 @@ public class LoginController {
 
         return result.isPresent() && result.get() == yesButton;
     }
+
+    /**
+     * Muestra una ventana emergente de alerta con un mensaje.
+     *
+     * @param message El mensaje que se mostrará en la ventana emergente.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText(null);
