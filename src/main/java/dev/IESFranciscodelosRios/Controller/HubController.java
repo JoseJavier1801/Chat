@@ -49,7 +49,7 @@ public class HubController {
     @FXML
     public void createRoom() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/createRoom.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("Controller/CreateRoom.fxml"));
             App.newStage(fxmlLoader.load());
         } catch (IOException e) {
             throw new RuntimeException(e);

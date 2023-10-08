@@ -98,6 +98,10 @@ public class RoomDAO implements IRoomDAO {
 
     public static RoomDAO get_instance() {
         if (_instance == null) {
+            File aux;
+            if(!(aux=new File(FileRootRoom.getAbsolutePath())).exists()){
+                aux.mkdir();
+            }
             _instance = new RoomDAO();
         }
         return _instance;
