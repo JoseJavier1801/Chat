@@ -22,8 +22,7 @@ public class LoginController {
     @FXML
     private Button loginBTN;
 
-    private UserDAO UDAO = UserDAO.getInstance();
-
+    private UserDAO UDAO =UserDAO.getInstance();
     /**
      * Este método se llama cuando se hace clic en el botón de inicio de sesión.
      * Realiza la lógica de inicio de sesión y gestiona las acciones correspondientes.

@@ -52,7 +52,6 @@ public class UserDAO {
         return instance;
     }
 
-
     /**
      * Agrega un nuevo usuario a la lista y guarda los datos en el archivo XML.
      *
@@ -117,7 +116,6 @@ public class UserDAO {
             }
         }
     }
-
     /**
      * Elimina un usuario por su apodo (nickname) y guarda los datos actualizados en el archivo XML.
      *
@@ -128,8 +126,6 @@ public class UserDAO {
         userList.getUsers().removeIf(user -> user.getNickname().equals(nickname));
         saveUsersToXml();
     }
-
-    // Métodos que manejan la lectura y escritura del archivo XML
 
     /**
      * Guarda los datos de la lista de usuarios en un archivo XML.
