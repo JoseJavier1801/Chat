@@ -25,6 +25,11 @@ public class ChatThreadUpdate extends Thread{
         this.ruta=App.FileRootRoom+"\\Rooms\\"+App.roomController.getRoom().getRoomName()+".xml";
         fileRootRoom= new File(ruta);
     }
+
+    /**
+     * Sera el metodo que se ejecute en bucle . Comprobando que la fecha de modificacion del archivo xml de la Room
+     * no ha sido modificado recientemente
+     */
     public void run(){
         try {
             while (fileRootRoom.exists()){

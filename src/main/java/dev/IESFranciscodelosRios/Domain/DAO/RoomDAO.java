@@ -15,6 +15,11 @@ public class RoomDAO implements IRoomDAO {
     static File FileRootRoom = new File(App.FileRootRoom + "\\Rooms");
     public static RoomDAO _instance;
 
+    /**
+     *  Se comprobara que no existe ninguna sala con ese nombre y en tal caso pues se creara el nuevo xml de la sala
+     * @param room
+     * @return
+     */
     @Override
     public Room NewRoom(Room room) {
 
@@ -44,6 +49,11 @@ public class RoomDAO implements IRoomDAO {
         return !file.exists();
     }
 
+    /**
+     * Recogera todas las salas y las filtrara para devolver la que sea igual al nombre buscado
+     * @param RoomName
+     * @return
+     */
     @Override
     public Room searchRoom(String RoomName) {
         Set<Room> allRooms = SearchAllRoom();

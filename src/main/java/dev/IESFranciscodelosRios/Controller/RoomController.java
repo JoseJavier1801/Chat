@@ -27,11 +27,18 @@ public class RoomController {
     private Text text_members;
     @FXML
     private Pane pane_ChatContainer;
+    /**
+     * funcion para volver atras al hub
+     */
 
     @FXML
     public void back() {
         App.setRoot("Hub");
     }
+    /**
+     * esta funcion se encarga de cargar los datos de las salas cuando nos metemos
+     * @param room
+     */
 
     public void SetData(Room room) {
         this.room = room;
@@ -39,6 +46,10 @@ public class RoomController {
         this.text_members.setText(getAllNameUsers());
         showChat();
     }
+    /**
+     * esta funcion es par buscar todos los nombres de los usuarios en el grupo
+     * @return result que son todos los nombres de los usuarios
+     */
     private String getAllNameUsers(){
         List<User> users= UserDAO.getInstance().getAllUsers();
         String result="";
@@ -47,6 +58,9 @@ public class RoomController {
         }
         return result;
     }
+    /**
+     * esta funcion cargara la ventana de chat de la sala con todos los mensajes que tenga ese chat
+     */
     public void showChat() {
         FXMLLoader loader = new FXMLLoader(App.class.getResource("Controller/Chat.fxml"));
         Node node=null;
@@ -61,7 +75,9 @@ public class RoomController {
         }
 
     }
-
+    /**
+     * esta funcion se en carga de guardar los datos de la sala de chat
+     */
     public void save() {
         RoomController roomController=App.roomController;
         String pathAbsolute= App.FileRootRoom+"\\Rooms\\";
