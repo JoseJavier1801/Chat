@@ -1,10 +1,13 @@
 package dev.IESFranciscodelosRios.Domain.DAO;
 
+import dev.IESFranciscodelosRios.App;
 import dev.IESFranciscodelosRios.Domain.Model.User;
 import dev.IESFranciscodelosRios.Domain.Model.UserList;
 import dev.IESFranciscodelosRios.Utils.XMLManager;
 
 import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,22 @@ public class UserDAO {
     private final String xmlFilePath; // Ruta del XML
 
     private UserDAO() {
-        xmlFilePath = "users.xml";
+        File aux;
+        String xmlDirectoryPath = App.FileRootRoom + "\\XML";
+        xmlFilePath = xmlDirectoryPath + "\\users.xml";
+
+        if (!(aux = new File(xmlDirectoryPath)).exists()) {
+            aux.mkdir();
+        }
+
+        File xmlFile = new File(xmlFilePath);
+        if (!xmlFile.exists()) {
+            try {
+                xmlFile.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         loadUserListFromXml();
     }
 
@@ -75,11 +93,11 @@ public class UserDAO {
     }
 
     private void saveUsersToXml() throws JAXBException {
-        XMLManager.writeXML(userList, xmlFilePath);
+        XMLManager.writeXML(userList,"users.xml");
     }
 
     private void loadUserListFromXml(){
-        userList = XMLManager.readXML(new UserList(), xmlFilePath);
+        userList = XMLManager.readXML(new UserList(), "users.xml");
         if (userList == null) {
             // Si no se pudo cargar desde el XML, crea una instancia vacía
             userList = new UserList();
